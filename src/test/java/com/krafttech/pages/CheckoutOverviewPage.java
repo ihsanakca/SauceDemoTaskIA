@@ -30,11 +30,8 @@ public class CheckoutOverviewPage extends BasePage{
         System.out.println("totalPriceText = " + totalPriceText);
         System.out.println("expectedTotalPrice = " + expectedTotal);
 
-        if (totalPriceText.equals("0")){
-            Assert.assertTrue(Double.parseDouble(totalPriceText)==0);
-        }else{
-            Assert.assertEquals(expectedTotal, totalPriceText);
-        }
+        Assert.assertEquals(expectedTotal, totalPriceText);
+
     }
 
     public void verifyNumberOfItems(){

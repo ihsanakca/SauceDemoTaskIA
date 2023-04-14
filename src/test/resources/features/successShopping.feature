@@ -25,7 +25,7 @@ Feature: Success Shopping Feature
     Then The number on the basket icon should show the added item number
     When The user navigate to page with related button: "checkout"
     Then The user should be able to see page title: "Checkout: Your Information"
-    When The user should be able to fill form with: "Selim", "Gezer" and "34520"
+    When The user should be able to fill form with: "Selim", "Gezer" and "35400"
     And  The user navigate to page with related button: "continue"
     Then The user should be able to see page title: "Checkout: Overview"
     When The user should be able to verify total price and number of items

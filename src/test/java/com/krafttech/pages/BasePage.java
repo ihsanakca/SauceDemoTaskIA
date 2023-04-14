@@ -22,7 +22,11 @@ public abstract class BasePage {
         return pageTitleElement.getText();
     }
     public int getAddedItemNumber(){
-        String addedItem = yourCartCounty.getText();
+//        String addedItem = yourCartCounty.getText();
+//        return Integer.parseInt(addedItem);
+
+        String addedItem=yourCartLink.getText();
+        if (addedItem.length()==0) return 0;
         return Integer.parseInt(addedItem);
     }
 }

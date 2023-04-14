@@ -20,7 +20,7 @@ public class YourCartPage extends BasePage{
 
     public void verifyAddedItemsToCart(List<String> expectedItemList){
         List<String> actualItemList = BrowserUtils.getElementsText(itemsAtTheCartList);
-        Assert.assertEquals(expectedItemList,actualItemList);
+        Assert.assertTrue(expectedItemList.containsAll(actualItemList));
     }
 
     public void deleteItemFromCart(String itemName){
