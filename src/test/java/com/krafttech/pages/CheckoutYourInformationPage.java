@@ -1,5 +1,6 @@
 package com.krafttech.pages;
 
+import com.krafttech.utilities.BrowserUtils;
 import com.krafttech.utilities.Driver;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -17,6 +18,16 @@ public class CheckoutYourInformationPage extends BasePage{
                 .sendKeys(firstName+Keys.TAB)
                 .sendKeys(lastName+ Keys.TAB)
                 .sendKeys(postalCode).perform();
+        BrowserUtils.waitFor(2);
+    }
+
+    public void fillInfoForm(String firstName, String lastName, Integer zipCode){
+        Actions actions=new Actions(Driver.get());
+        actions.click(firstNameInputBar)
+                .sendKeys(firstName+Keys.TAB)
+                .sendKeys(lastName+ Keys.TAB)
+                .sendKeys(zipCode.toString()).perform();
+        BrowserUtils.waitFor(2);
     }
 
 }

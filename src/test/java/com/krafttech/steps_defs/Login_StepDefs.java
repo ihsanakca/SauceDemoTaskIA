@@ -3,6 +3,7 @@ package com.krafttech.steps_defs;
 import com.krafttech.pages.LoginPage;
 import com.krafttech.utilities.ConfigurationReader;
 import com.krafttech.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
@@ -17,4 +18,6 @@ public class Login_StepDefs {
     public void theUserTypeInValidCredentialsAnd(String userName, String password) {
     loginPage.loginMtd(userName,password);
     }
+
+
 }

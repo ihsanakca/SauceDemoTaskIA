@@ -27,7 +27,7 @@ public class Hooks {
             byte[] screenshot = ((TakesScreenshot) Driver.get()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot,"image/png","screenshot");
         }
-        BrowserUtils.waitFor(4);
+        BrowserUtils.waitFor(1);
         Driver.closeDriver();
     }
 }

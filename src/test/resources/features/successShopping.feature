@@ -5,7 +5,7 @@ Feature: Success Shopping Feature
     When The user type in valid credentials: "standard_user" and "secret_sauce"
     Then The user should be able to see page title: "Products"
 
-  @wip
+
   Scenario: Positive Success Shopping E2E Test
     When The user should be able to sort items order type: "Price (high to low)"
     And The user should be able to add items to cart with item name: "Sauce Labs Fleece Jacket"
