@@ -30,4 +30,14 @@ public class CheckoutInfo_StepDefs {
 
     }
 
+    @When("The user should be able to fill form with excel data: {string} {string} and {int}")
+    public void the_user_should_be_able_to_fill_form_with_excel_data_and(String path, String sheetName, Integer rowNumber) {
+        ExcelUtil excelUtil=new ExcelUtil(path,sheetName);
+
+        List<Map<String, String>> dataList = excelUtil.getDataList();
+
+        checkoutYourInformationPage.fillInfoForm(dataList.get(rowNumber).get("First Name"),
+                dataList.get(rowNumber).get("Last Name"),dataList.get(rowNumber).get("Zip Code"));
+    }
+
 }
