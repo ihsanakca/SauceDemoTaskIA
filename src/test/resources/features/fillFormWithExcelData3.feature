@@ -1,4 +1,4 @@
-Feature: Fill Shopping Form with Excel Data
+Feature: Fill Shopping Form with Excel Data 3
 
   Background:
     Given The user is on the login page
@@ -8,11 +8,10 @@ Feature: Fill Shopping Form with Excel Data
     When The user navigate to your cart page
     When The user navigate to page with related button: "checkout"
 
+  @wip
+  Scenario Outline: Filling form excel data scenario 3
 
-
-  Scenario Outline: Filling form excel data scenario
-
-    When The user should be able to fill form with excel data: "src/test/resources/automationCucumber.xlsx" "<sheetName>" and <rowNumber>
+    When The user should be able to fill form with path: "src/test/resources/automationCucumber.xlsx", "<sheetName>" and <rowNumber>
     And  The user navigate to page with related button: "continue"
     Then The user should be able to see page title: "Checkout: Overview"
     Examples:
