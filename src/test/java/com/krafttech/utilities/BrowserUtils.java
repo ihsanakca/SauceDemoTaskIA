@@ -1,5 +1,6 @@
 package com.krafttech.utilities;
 
+
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.*;
@@ -11,12 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class BrowserUtils {
-
     /*
      * takes screenshot
      * @param name
@@ -27,7 +28,10 @@ public class BrowserUtils {
         String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         // TakesScreenshot ---> interface from selenium which takes screenshots
         TakesScreenshot ts = (TakesScreenshot) Driver.get();
+
+        //geçici dosyaya ekran resmini alalım
         File source = ts.getScreenshotAs(OutputType.FILE);
+        //   ((TakesScreenshot)Driver.get()).getScreenshotAs(OutputType.FILE);
         // full path to the screenshot location
         String target = System.getProperty("user.dir") + "/test-output/Screenshots/" + name + date + ".png";
         File finalDestination = new File(target);
@@ -40,7 +44,7 @@ public class BrowserUtils {
      * Switches to new window by the exact title. Returns to original window if target title not found
      * @param targetTitle
      */
-    public static void switchToWindow(String targetTitle,WebDriver driver) {
+    public static void switchToWindow(String targetTitle) {
         String origin = Driver.get().getWindowHandle();
         for (String handle : Driver.get().getWindowHandles()) {
             Driver.get().switchTo().window(handle);
@@ -61,27 +65,14 @@ public class BrowserUtils {
         actions.moveToElement(element).perform();
     }
 
-    public static void dragAndDropBy(WebElement element, int x, int y){
-        Actions actions=new Actions(Driver.get());
-        actions.dragAndDropBy(element,x,y).perform();
-    }
-
-    public static void dragAndDrop(WebElement element1, WebElement element2){
-        Actions actions=new Actions(Driver.get());
-        actions.dragAndDrop(element1,element2).perform();
-    }
-
     /**
-     * return a list of string from a list of elements
+     * return a list of string from a list of web elements
      *
      * @param list of webelements
      * @return list of string
      */
     public static List<String> getElementsText(List<WebElement> list) {
-//        List<String> elemTexts = new ArrayList<String>();
         List<String> elemTexts = new ArrayList<>();
-
-
         for (WebElement el : list) {
             elemTexts.add(el.getText());
         }
@@ -91,7 +82,6 @@ public class BrowserUtils {
     /**
      * Extracts text from list of elements matching the provided locator into new List<String>
      *
-     * @param locator
      * @return list of strings
      */
     public static List<String> getElementsText(By locator) {
@@ -126,7 +116,8 @@ public class BrowserUtils {
      * @return
      */
     public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), timeToWaitInSec);
+        //WebDriverWait wait = new WebDriverWait(Driver.get(), timeToWaitInSec);
+        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -138,7 +129,8 @@ public class BrowserUtils {
      * @return
      */
     public static WebElement waitForVisibility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
+       // WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
+            WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -150,7 +142,8 @@ public class BrowserUtils {
      * @return
      */
     public static WebElement waitForClickablility(WebElement element, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
+       // WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
+        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
@@ -162,7 +155,8 @@ public class BrowserUtils {
      * @return
      */
     public static WebElement waitForClickablility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
+        //WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
+        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -178,7 +172,8 @@ public class BrowserUtils {
             }
         };
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.get(), timeOutInSeconds);
+            WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
+         //   WebDriverWait wait = new WebDriverWait(Driver.get(), timeOutInSeconds);
             wait.until(expectation);
         } catch (Throwable error) {
             error.printStackTrace();
@@ -215,6 +210,8 @@ public class BrowserUtils {
 
         }
     }
+
+
     /**
      * Verifies whether the element is displayed on page
      *
@@ -282,8 +279,6 @@ public class BrowserUtils {
     public static void scrollToElement(WebElement element) {
         ((JavascriptExecutor) Driver.get()).executeScript("arguments[0].scrollIntoView(true);", element);
     }
-
-
 
     /**
      * Performs double click action on an element
@@ -355,7 +350,7 @@ public class BrowserUtils {
      *
      * @param element
      */
-    public static void executeJScommand(WebElement element, String command) {
+    public static void executeJSCommand(WebElement element, String command) {
         JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
         jse.executeScript(command, element);
 
@@ -366,7 +361,7 @@ public class BrowserUtils {
      *
      * @param command
      */
-    public static void executeJScommand(String command) {
+    public static void executeJSCommand(String command) {
         JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
         jse.executeScript(command);
 
@@ -408,18 +403,15 @@ public class BrowserUtils {
      * @param time
      */
     public static void waitForPresenceOfElement(By by, long time) {
-        new WebDriverWait(Driver.get(), time).until(ExpectedConditions.presenceOfElementLocated(by));
-    }
-    public static void setWindowDimesion(int width, int height){
-        Driver.get().manage().window().setSize(new Dimension(width,height));
-//        Dimension dimension = new Dimension(width, height);
-//        Driver.get().manage().window().setSize(dimension);
-    }
-    public static void setWindowPoint(int x, int y){
-        Driver.get().manage().window().setPosition(new Point(x,y));
+      //  new WebDriverWait(Driver.get(), time).until(ExpectedConditions.presenceOfElementLocated(by));
+        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    public static void clearAndSendKeys(WebElement element,String text){
+        element.clear();
+        element.sendKeys(text);
+    }
 
 
 }
-
