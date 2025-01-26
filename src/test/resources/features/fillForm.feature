@@ -1,3 +1,4 @@
+@regression
 Feature: Fill Shopping Form test
 
   Background:

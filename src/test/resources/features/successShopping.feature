@@ -1,3 +1,4 @@
+@regression
 Feature: Success Shopping Feature
 
   Background:
